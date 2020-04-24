@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".AddNoteActivity">
+    tools:context=".AddEditNoteActivity">
 
     <EditText
         android:id="@+id/title_EditText"
@@ -35,6 +35,12 @@
     <Button
         android:id="@+id/save_Button"
         android:text="SAVE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/edit_Button"
+        android:text="EDIT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

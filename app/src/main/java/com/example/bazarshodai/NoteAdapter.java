@@ -17,6 +17,7 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private List<Note> notes = new ArrayList<>();
+    private OnItemClickListener onItemClickListener;
 
 
     @NonNull
@@ -34,12 +35,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         holder.textView_Amount.setText(String.valueOf(currentNote.getAmount()));
         holder.textView_AmountType.setText(currentNote.getAmountType());
         holder.textView_Description.setText(currentNote.getDescription());
+
     }
 
     @Override
     public int getItemCount() {
         return notes.size();
     }
+
     //This function will be called in Observe function in HomeActivity
     public void setNotes(List<Note> notes){
         this.notes = notes;
@@ -67,6 +70,27 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             textView_Amount = itemView.findViewById(R.id.amount);
             textView_AmountType = itemView.findViewById(R.id.amount_type);
             textView_Description = itemView.findViewById(R.id.description);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (onItemClickListener != null && position != RecyclerView.NO_POSITION){
+                        onItemClickListener.onItemClick(notes.get(position));
+                    }
+
+                }
+            });
+
         }
     }
+
+    public interface OnItemClickListener{
+        void onItemClick(Note note);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
 }
